@@ -1,0 +1,554 @@
+[
+    {
+        "id": 148899,
+        "name": "Deployable Billboard"
+    },
+    {
+        "id": 33585,
+        "name": "Defunct Amarr Encounter Surveillance System"
+    },
+    {
+        "id": 33595,
+        "name": "Defunct Caldari Encounter Surveillance System"
+    },
+    {
+        "id": 33608,
+        "name": "Defunct Gallente Encounter Surveillance System"
+    },
+    {
+        "id": 33610,
+        "name": "Defunct Minmatar Encounter Surveillance System"
+    },
+    {
+        "id": 73270,
+        "name": "Amarr Listening Outpost"
+    },
+    {
+        "id": 73272,
+        "name": "Caldari Listening Outpost"
+    },
+    {
+        "id": 73273,
+        "name": "Gallente Listening Outpost"
+    },
+    {
+        "id": 73271,
+        "name": "Minmatar Listening Outpost"
+    },
+    {
+        "id": 73225,
+        "name": "Amarr Propaganda Broadcast Structure"
+    },
+    {
+        "id": 73227,
+        "name": "Caldari Propaganda Broadcast Structure"
+    },
+    {
+        "id": 73228,
+        "name": "Gallente Propaganda Broadcast Structure"
+    },
+    {
+        "id": 73226,
+        "name": "Minmatar Propaganda Broadcast Structure"
+    },
+    {
+        "id": 60244,
+        "name": "CONCORD Rogue Analysis Beacon"
+    },
+    {
+        "id": 33476,
+        "name": "Mobile Cynosural Inhibitor"
+    },
+    {
+        "id": 59630,
+        "name": "Covert Mobile Cynosural Beacon"
+    },
+    {
+        "id": 58906,
+        "name": "Highsec Authorized Mobile Cynosural Beacon"
+    },
+    {
+        "id": 57319,
+        "name": "Mobile Cynosural Beacon"
+    },
+    {
+        "id": 33587,
+        "name": "Mobile Decoy Unit"
+    },
+    {
+        "id": 33520,
+        "name": "Wetu Mobile Depot"
+    },
+    {
+        "id": 33522,
+        "name": "Yurt Mobile Depot"
+    },
+    {
+        "id": 33474,
+        "name": "Mobile Depot"
+    },
+    {
+        "id": 4386,
+        "name": "Mobile Large Jump Disruptor I"
+    },
+    {
+        "id": 33591,
+        "name": "Mobile Micro Jump Unit"
+    },
+    {
+        "id": 33990,
+        "name": "Tournament Micro Jump Unit"
+    },
+    {
+        "id": 58904,
+        "name": "Mobile Observatory"
+    },
+    {
+        "id": 75677,
+        "name": "QA Shady Mobile Observatory"
+    },
+    {
+        "id": 33589,
+        "name": "Mobile Scan Inhibitor"
+    },
+    {
+        "id": 36523,
+        "name": "Tournament Practice Unit"
+    },
+    {
+        "id": 33479,
+        "name": "Large Mobile Siphon Unit"
+    },
+    {
+        "id": 33478,
+        "name": "Medium Mobile Siphon Unit"
+    },
+    {
+        "id": 33581,
+        "name": "Small Mobile Hybrid Siphon Unit"
+    },
+    {
+        "id": 33583,
+        "name": "Small Mobile Rote Siphon Unit"
+    },
+    {
+        "id": 33477,
+        "name": "Small Mobile Siphon Unit"
+    },
+    {
+        "id": 33702,
+        "name": "Magpie Mobile Tractor Unit"
+    },
+    {
+        "id": 33700,
+        "name": "Packrat Mobile Tractor Unit"
+    },
+    {
+        "id": 56701,
+        "name": "Mobile Sanguine Harvester"
+    },
+    {
+        "id": 33475,
+        "name": "Mobile Tractor Unit"
+    },
+    {
+        "id": 34120,
+        "name": "Mobile Competitive Vault"
+    },
+    {
+        "id": 12200,
+        "name": "Mobile Large Warp Disruptor I"
+    },
+    {
+        "id": 26888,
+        "name": "Mobile Large Warp Disruptor II"
+    },
+    {
+        "id": 12199,
+        "name": "Mobile Medium Warp Disruptor I"
+    },
+    {
+        "id": 26890,
+        "name": "Mobile Medium Warp Disruptor II"
+    },
+    {
+        "id": 12198,
+        "name": "Mobile Small Warp Disruptor I"
+    },
+    {
+        "id": 26892,
+        "name": "Mobile Small Warp Disruptor II"
+    },
+    {
+        "id": 28770,
+        "name": "Syndicate Mobile Large Warp Disruptor"
+    },
+    {
+        "id": 28772,
+        "name": "Syndicate Mobile Medium Warp Disruptor"
+    },
+    {
+        "id": 28774,
+        "name": "Syndicate Mobile Small Warp Disruptor"
+    },
+    {
+        "id": 26849,
+        "name": "Tournament Bubble"
+    },
+    {
+        "id": 670,
+        "name": "Capsule"
+    },
+    {
+        "id": 33328,
+        "name": "Capsule - Genolution Auroral 197-variant"
+    },
+    {
+        "id": 40362,
+        "name": "Ametat I"
+    },
+    {
+        "id": 40560,
+        "name": "Ametat II"
+    },
+    {
+        "id": 40364,
+        "name": "Antaeus I"
+    },
+    {
+        "id": 40562,
+        "name": "Antaeus II"
+    },
+    {
+        "id": 32325,
+        "name": "Cyclops I"
+    },
+    {
+        "id": 40563,
+        "name": "Cyclops II"
+    },
+    {
+        "id": 45673,
+        "name": "Dog_PLACEHOLDER"
+    },
+    {
+        "id": 45675,
+        "name": "Easy_PLACEHOLDER"
+    },
+    {
+        "id": 40365,
+        "name": "Gungnir I"
+    },
+    {
+        "id": 40564,
+        "name": "Gungnir II"
+    },
+    {
+        "id": 32340,
+        "name": "Malleus I"
+    },
+    {
+        "id": 40561,
+        "name": "Malleus II"
+    },
+    {
+        "id": 32344,
+        "name": "Mantis I"
+    },
+    {
+        "id": 40567,
+        "name": "Mantis II"
+    },
+    {
+        "id": 2948,
+        "name": "Shadow"
+    },
+    {
+        "id": 40363,
+        "name": "Termite I"
+    },
+    {
+        "id": 40566,
+        "name": "Termite II"
+    },
+    {
+        "id": 32342,
+        "name": "Tyrfing I"
+    },
+    {
+        "id": 40565,
+        "name": "Tyrfing II"
+    },
+    {
+        "id": 45669,
+        "name": "Baker_PLACEHOLDER"
+    },
+    {
+        "id": 45671,
+        "name": "Charlie_PLACEHOLDER"
+    },
+    {
+        "id": 23057,
+        "name": "Dragonfly I"
+    },
+    {
+        "id": 40557,
+        "name": "Dragonfly II"
+    },
+    {
+        "id": 23061,
+        "name": "Einherji I"
+    },
+    {
+        "id": 40559,
+        "name": "Einherji II"
+    },
+    {
+        "id": 40358,
+        "name": "Equite I"
+    },
+    {
+        "id": 40552,
+        "name": "Equite II"
+    },
+    {
+        "id": 23059,
+        "name": "Firbolg I"
+    },
+    {
+        "id": 40558,
+        "name": "Firbolg II"
+    },
+    {
+        "id": 40361,
+        "name": "Gram I"
+    },
+    {
+        "id": 40553,
+        "name": "Gram II"
+    },
+    {
+        "id": 40359,
+        "name": "Locust I"
+    },
+    {
+        "id": 40554,
+        "name": "Locust II"
+    },
+    {
+        "id": 40360,
+        "name": "Satyr I"
+    },
+    {
+        "id": 40555,
+        "name": "Satyr II"
+    },
+    {
+        "id": 23055,
+        "name": "Templar I"
+    },
+    {
+        "id": 40556,
+        "name": "Templar II"
+    },
+    {
+        "id": 45651,
+        "name": "Able_PLACEHOLDER"
+    },
+    {
+        "id": 37599,
+        "name": "Cenobite I"
+    },
+    {
+        "id": 40568,
+        "name": "Cenobite II"
+    },
+    {
+        "id": 40347,
+        "name": "Dromi I"
+    },
+    {
+        "id": 40571,
+        "name": "Dromi II"
+    },
+    {
+        "id": 40345,
+        "name": "Scarab I"
+    },
+    {
+        "id": 40569,
+        "name": "Scarab II"
+    },
+    {
+        "id": 40346,
+        "name": "Siren I"
+    },
+    {
+        "id": 40570,
+        "name": "Siren II"
+    },
+    {
+        "id": 47124,
+        "name": "Standup Ametat I"
+    },
+    {
+        "id": 47127,
+        "name": "Standup Ametat II"
+    },
+    {
+        "id": 47126,
+        "name": "Standup Antaeus I"
+    },
+    {
+        "id": 47129,
+        "name": "Standup Antaeus II"
+    },
+    {
+        "id": 47117,
+        "name": "Standup Cyclops I"
+    },
+    {
+        "id": 47121,
+        "name": "Standup Cyclops II"
+    },
+    {
+        "id": 47039,
+        "name": "Standup Gungnir I"
+    },
+    {
+        "id": 47130,
+        "name": "Standup Gungnir II"
+    },
+    {
+        "id": 47116,
+        "name": "Standup Malleus I"
+    },
+    {
+        "id": 47119,
+        "name": "Standup Malleus II"
+    },
+    {
+        "id": 47038,
+        "name": "Standup Mantis I"
+    },
+    {
+        "id": 47120,
+        "name": "Standup Mantis II"
+    },
+    {
+        "id": 47123,
+        "name": "Standup Shadow"
+    },
+    {
+        "id": 47125,
+        "name": "Standup Termite I"
+    },
+    {
+        "id": 47128,
+        "name": "Standup Termite II"
+    },
+    {
+        "id": 47118,
+        "name": "Standup Tyrfing I"
+    },
+    {
+        "id": 47122,
+        "name": "Standup Tyrfing II"
+    },
+    {
+        "id": 47138,
+        "name": "Standup Dragonfly I"
+    },
+    {
+        "id": 47142,
+        "name": "Standup Dragonfly II"
+    },
+    {
+        "id": 47140,
+        "name": "Standup Einherji I"
+    },
+    {
+        "id": 47144,
+        "name": "Standup Einherji II"
+    },
+    {
+        "id": 47145,
+        "name": "Standup Equite I"
+    },
+    {
+        "id": 47148,
+        "name": "Standup Equite II"
+    },
+    {
+        "id": 47139,
+        "name": "Standup Firbolg I"
+    },
+    {
+        "id": 47143,
+        "name": "Standup Firbolg II"
+    },
+    {
+        "id": 47036,
+        "name": "Standup Gram I"
+    },
+    {
+        "id": 47151,
+        "name": "Standup Gram II"
+    },
+    {
+        "id": 47146,
+        "name": "Standup Locust I"
+    },
+    {
+        "id": 47149,
+        "name": "Standup Locust II"
+    },
+    {
+        "id": 47147,
+        "name": "Standup Satyr I"
+    },
+    {
+        "id": 47150,
+        "name": "Standup Satyr II"
+    },
+    {
+        "id": 47035,
+        "name": "Standup Templar I"
+    },
+    {
+        "id": 47141,
+        "name": "Standup Templar II"
+    },
+    {
+        "id": 47131,
+        "name": "Standup Cenobite I"
+    },
+    {
+        "id": 47134,
+        "name": "Standup Cenobite II"
+    },
+    {
+        "id": 47133,
+        "name": "Standup Dromi I"
+    },
+    {
+        "id": 47137,
+        "name": "Standup Dromi II"
+    },
+    {
+        "id": 47132,
+        "name": "Standup Scarab I"
+    },
+    {
+        "id": 47135,
+        "name": "Standup Scarab II"
+    },
+    {
+        "id": 47037,
+        "name": "Standup Siren I"
+    },
+    {
+        "id": 47136,
+        "name": "Standup Siren II"
+    }
+]
