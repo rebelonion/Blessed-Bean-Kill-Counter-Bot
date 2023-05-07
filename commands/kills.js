@@ -133,7 +133,7 @@ module.exports = {
                     if (!response.characters) {
                         console.log(`The character ${characterName} does not exist.`);
                         console.log(''); //blank line
-                        return interaction.reply(`${characterName} is not a valid character.`);
+                        return interaction.editReply(`${characterName} is not a valid character.`);
                     }
                     
                 })
