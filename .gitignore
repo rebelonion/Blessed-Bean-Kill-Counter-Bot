@@ -131,3 +131,7 @@ Deprecated/
 
 #blues.json file
 blues.json
+
+#recent requests files
+recentKillRequests.json
+recentWhyRequests.json
