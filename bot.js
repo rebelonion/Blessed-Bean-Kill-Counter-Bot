@@ -42,7 +42,7 @@ client.on('interactionCreate', async interaction => {
 	try {
 		await command.execute(interaction);
 	} catch (error) {
-		console.error(`Error executing command ${command.data.name}: ${error}`);
+		console.log(`Error executing command ${command.data.name}: ${error}`);
 	}
 });
 

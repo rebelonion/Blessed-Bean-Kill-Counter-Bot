@@ -138,7 +138,7 @@ module.exports = {
                     
                 })
                 .catch(error => {
-                    console.error(`Error fetching character ID: ${error}`);
+                    console.log(`Error fetching character ID: ${error}`);
                     errorFlag = true;
                     return interaction.editReply(`${characterName} was not found.`);
                 });
@@ -203,11 +203,11 @@ module.exports = {
                     })
                     .catch(error => {
                         if (error.message === 'ReferenceError: response is not defined') {
-                            console.error(`Error fetching kill data: ${error}`);
+                            console.log(`Error fetching kill data: ${error}`);
                             errorFlag = true;
                             return interaction.editReply(`${characterName} has no (recent) kill history.`);
                         } else {
-                            console.error(`Error fetching kill data: ${error}`);
+                            console.log(`Error fetching kill data: ${error}`);
                             errorFlag = true;
                             //dump response
                             console.log(response);
@@ -267,7 +267,7 @@ module.exports = {
                 };
             })
             .catch(error => {
-                console.error(`Error fetching kill data: ${error}`);
+                console.log(`Error fetching kill data: ${error}`);
                 return interaction.editReply(`Error fetching kill data: ${error}. Bot may be rate limited.\nPlease try again later.`);
             });
 
@@ -297,7 +297,7 @@ function getNumberOfKills(killmailIds, killmailHashes, totalKillsOffset = 0) {
             .then(response => response.json())
             .then(response => response)
             .catch(error => {
-                console.error(`Error fetching killmail data: ${error}`);
+                console.log(`Error fetching killmail data: ${error}`);
                 errorFlag = true;
                 return interaction.editReply(`Error fetching killmail data: ${error}. Bot may be rate limited.\nPlease try again later.`);;
             });
