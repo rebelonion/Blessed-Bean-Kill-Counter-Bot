@@ -26,7 +26,7 @@ module.exports = {
         .setName('kills')
         .setDescription('Gets the number of kills in the last 30 days.')
         .addStringOption(option =>
-            option.setName('player')
+            option.setName('player1')
             .setDescription('The name of the player.')
             .setRequired(true)
         )
@@ -45,12 +45,16 @@ module.exports = {
             ephemeral: true
         });
 
+        console.log('');
+        console.log('----------------------------------- NEW ENTRY -----------------------------------');
+        console.log('Entry type: kills.js');
         console.log(`command called by ${interaction.user.tag} at ${interaction.user.createdAt} on ${interaction.guild.name} in ${interaction.channel.name}`)
 
         //if not created, create the file recentRequests.json
         if (!fs.existsSync('recentKillRequests.json')) {
             fs.writeFileSync('recentKillRequests.json', '{}');
         }
+
         //check if the user has made a request in the last 5 minutes
         const recentRequestsJson = fs.readFileSync('recentKillRequests.json');
         const recentRequests = JSON.parse(recentRequestsJson);
@@ -62,6 +66,7 @@ module.exports = {
                 const minutes = Math.floor((300 - timeSinceLastRequest) / 60);
                 const seconds = Math.floor((300 - timeSinceLastRequest) % 60);
                 console.log(`User ${interaction.user.tag} has made a request in the last 5 minutes. Please wait ${minutes} minutes and ${seconds} seconds before making another request.`);
+                console.log(''); //blank line
                 return interaction.editReply(`You have made a request in the last 5 minutes. Please wait ${minutes} minutes and ${seconds} seconds before making another request.`);
             }
         } else {
@@ -70,18 +75,25 @@ module.exports = {
             fs.writeFileSync('recentKillRequests.json', JSON.stringify(recentRequests));
         }
 
-        var numplayers = 1;
-        //if player2 or player3 is not null, then numplayers = 2, if both are not null, then numplayers = 3
+        var numCharacters = 1;
+        //if player2 or player3 is not null, then numCharacters = 2, if both are not null, then numCharacters = 3
         //because of discord, player3 can be used even if player2 is null
         if (interaction.options.getString('player2') != null) {
-            numplayers++;
+            numCharacters++;
         }
         if (interaction.options.getString('player3') != null) {
-            numplayers++;
+            numCharacters++;
         }
-        console.log(`numplayers is ${numplayers}`);
+        console.log(`numCharacters is ${numCharacters}`);
 
-        const characterName = interaction.options.getString('player');
+        //get the character names
+        var characterNames = [];
+        for (let i = 0; i < numCharacters; i++) {
+            characterNames[i] = interaction.options.getString(`player${i+1}`);
+            console.log(`characterNames[${i}] is ${characterNames[i]}`);
+        }
+
+        var errorFlag = false;
 
         const characterIDAPI = 'https://esi.evetech.net/latest/universe/ids/?datasource=tranquility&language=en';
         const characterAPIheaders = {
@@ -91,39 +103,71 @@ module.exports = {
             "Cache-Control": "no-cache"
         };
 
-        const characterAPIbody = JSON.stringify([characterName]);
-        fetch(characterIDAPI, {
-                method: "POST",
-                headers: characterAPIheaders,
-                timeout: 10000,
-                body: characterAPIbody,
-            })
-            .then(response => response.json())
-            .then(async response => {
+        // empty arrays to store the killmail IDs and hashes
+        const killmailIds = [];
+        const killmailHashes = [];
+        // empty array to store the fetch promises
+        const fetchPromises = [];
+
+        for (let i = 0; i < numCharacters; i++) {
+            //check for errors
+            if (errorFlag) {
+                return;
+            }
+            const characterName = characterNames[i];
+            console.log(`characterName is ${characterName}`);
+            const characterAPIbody = JSON.stringify([characterName]);
+            var characterId = null;
+            const fetchPromise1 = fetch(characterIDAPI, {
+                    method: "POST",
+                    headers: characterAPIheaders,
+                    timeout: 10000,
+                    body: characterAPIbody,
+                })
+                .then(response => response.json())
+                .then(async response => {
+                    characterId = response.characters[0].id;
 
 
-                // check if the character section exists
-                if (!response.characters) {
-                    await interaction.reply(`${characterName} is not a valid character.`);
-                    return;
-                }
-                const characterId = response.characters[0].id;
-                console.log(`The character ID for ${characterName} is ${characterId}.`);
+                    // check if the character section exists
+                    if (!response.characters) {
+                        console.log(`The character ${characterName} does not exist.`);
+                        console.log(''); //blank line
+                        return interaction.reply(`${characterName} is not a valid character.`);
+                    }
+                    
+                })
+                .catch(error => {
+                    console.error(`Error fetching character ID: ${error}`);
+                    errorFlag = true;
+                    return interaction.editReply(`${characterName} was not found.`);
+                });
+                fetchPromises.push(fetchPromise1);
+                //wait for fetchPromise1 to resolve
+                await fetchPromise1
+                .then(async () => {
+                    console.log('fetchPromise1 resolved');
 
-                // Encode the character ID for use in the URL
-                const encodedCharacterID = encodeURIComponent(characterId);
+                    console.log(`The character ID for ${characterName} is ${characterId}.`);
 
-                // Construct the API URL
-                const apiUrl = `https://zkillboard.com/api/kills/characterID/${encodedCharacterID}/`;
+                    //return if the character ID is null
+                    if (characterId == null) {
+                        return;
+                    }
 
-                // Set headers for the API request
-                const headers = {
-                    'Accept-Encoding': 'gzip',
-                    'User-Agent': `discord bot. maintainer: ${maintainer}`
-                };
+                    // Encode the character ID for use in the URL
+                    const encodedCharacterID = encodeURIComponent(characterId);
 
-                // Fetch the kill data from the API
-                fetch(apiUrl, {
+                    // Construct the API URL
+                    const apiUrl = `https://zkillboard.com/api/kills/characterID/${encodedCharacterID}/`;
+
+                    // Set headers for the API request
+                    const headers = {
+                        'Accept-Encoding': 'gzip',
+                        'User-Agent': `discord bot. maintainer: ${maintainer}`
+                    };
+                    // Fetch the kill data from the API
+                    const fetchPromise2 = fetch(apiUrl, {
                         headers: headers,
                         timeout: 10000
                     })
@@ -132,7 +176,7 @@ module.exports = {
 
                         // Check if there was a kill found
                         if (response.length === 0) {
-                            await interaction.editReply(`${playerName} has no recent kills.`);
+                            await interaction.editReply(`${characterName} has no recent kills.`);
                             return;
                         }
 
@@ -140,9 +184,7 @@ module.exports = {
                         const kill = response[0];
                         const killId = kill.killmail_id;
 
-                        // Create empty arrays to store the killmail IDs and hashes
-                        const killmailIds = [];
-                        const killmailHashes = [];
+
 
                         // Get all of the killmail hashes
                         for (let i = 0; i < response.length; i++) {
@@ -156,49 +198,96 @@ module.exports = {
                             killmailIds.push(killmailId);
                         }
 
-                        var numkills = await getNumberOfKills(killmailIds, killmailHashes);
+                        
 
-                        //update the recentRequests.json file
-                        recentRequests[interaction.user.id] = Date.now();
-                        fs.writeFileSync('recentKillRequests.json', JSON.stringify(recentRequests));
-
-                        // Send the kill details as a reply
-                        //if the total kills is greater than or equal to 200, add  a + to the end
-                        //the last 3 characters of numkills are usually the number of kills
-                        if (numkills.slice(-3) >= 200) {
-                            return interaction.editReply(`${characterName} has at least ${numkills}+ total kills.`);
-
-                        } else {
-                            return interaction.editReply(`${characterName} has ${numkills} total kills.`);
-                        }
                     })
                     .catch(error => {
                         if (error.message === 'ReferenceError: response is not defined') {
                             console.error(`Error fetching kill data: ${error}`);
+                            errorFlag = true;
                             return interaction.editReply(`${characterName} has no (recent) kill history.`);
                         } else {
                             console.error(`Error fetching kill data: ${error}`);
+                            errorFlag = true;
+                            //dump response
+                            console.log(response);
                             return interaction.editReply(`Error fetching kill data: ${error}. Bot may be rate limited.\nPlease try again later.`);
 
                         }
                     });
+                    fetchPromises.push(fetchPromise2);
+                });
+        }
+
+        // Wait for all of the fetch promises to resolve
+        await Promise.all(fetchPromises)
+            .then(async () => {
+                //check for errors
+                if (errorFlag) {
+                    return;
+                }
+
+                //check killmailHashes and killmailIds for duplicates
+                var numDuplicates = 0;
+                var uniqueHashes = [];
+                var uniqueIds = [];
+                for (let i = 0; i < killmailHashes.length; i++) {
+                    if (!uniqueHashes.includes(killmailHashes[i])) {
+                        uniqueHashes.push(killmailHashes[i]);
+                        uniqueIds.push(killmailIds[i]);
+                    }else{
+                        console.log(`duplicate found: ${killmailIds[i]} ${killmailHashes[i]}`);
+                        numDuplicates++;
+                    }
+                }
+                var numkills = await getNumberOfKills(uniqueIds, uniqueHashes, numDuplicates);
+                if (numkills == null) {
+                    return;
+                }
+
+                //update the recentRequests.json file
+                recentRequests[interaction.user.id] = Date.now();
+                fs.writeFileSync('recentKillRequests.json', JSON.stringify(recentRequests));
+
+                // Send the kill details as a reply
+                //if the total kills is greater than or equal to 200, add  a + to the end
+                //the last 3 characters of numkills are usually the number of kills
+                if (numkills.slice(-3) >= 200) {
+                    if (numCharacters > 1) {
+                        return interaction.editReply(`Characters have at least ${numkills}+ total kills.`);
+                    } else {
+                        return interaction.editReply(`${characterNames[0]} has at least ${numkills}+ total kills.`);
+                    }
+                } else {
+                    if (numCharacters > 1) {
+                        return interaction.editReply(`Characters have ${numkills} total kills.`);
+                    } else {
+                        return interaction.editReply(`${characterNames[0]} has ${numkills} total kills.`);
+                    }
+                };
             })
             .catch(error => {
-                console.error(`Error fetching character ID: ${error}`);
-                return interaction.editReply(`${characterName} was not found.`);
+                console.error(`Error fetching kill data: ${error}`);
+                return interaction.editReply(`Error fetching kill data: ${error}. Bot may be rate limited.\nPlease try again later.`);
             });
+
     },
 };
 
 //return the number of kills in the last 30 days
-function getNumberOfKills(killmailIds, killmailHashes) {
+function getNumberOfKills(killmailIds, killmailHashes, totalKillsOffset = 0) {
     const requestHeaders = {
         "Accept": "application/json",
         "cache-control": "no-cache"
     };
 
+    var errorFlag = false;
+
     // map the killmail ids and hashes to an array of promises
     const requests = killmailIds.map((id, index) => {
+
+        // TODO: stop requesting killmails if the we have reached 30 days ago
+
         const requestAPI = `https://esi.evetech.net/latest/killmails/${id}/${killmailHashes[index]}/?datasource=tranquility`;
         return fetch(requestAPI, {
                 method: "GET",
@@ -209,11 +298,16 @@ function getNumberOfKills(killmailIds, killmailHashes) {
             .then(response => response)
             .catch(error => {
                 console.error(`Error fetching killmail data: ${error}`);
+                errorFlag = true;
                 return interaction.editReply(`Error fetching killmail data: ${error}. Bot may be rate limited.\nPlease try again later.`);;
             });
     });
     // wait for all promises to resolve
     return Promise.all(requests).then(killmailData => {
+        //check for errors
+        if (errorFlag) {
+            return null;
+        }
         // find the amount of kills in the last 30 days (time format is YYYY-MM-DDTHH:MM:SSZ)
         const today = new Date();
         var numberOfKills = 0;
@@ -257,13 +351,12 @@ function getNumberOfKills(killmailIds, killmailHashes) {
             }
         }
         //combine the number of kills and the total number of kills into a string
-        numberOfKills = numberOfKills.toString() + " accepted out of " + totalKills.toString();
+        numberOfKills = numberOfKills.toString() + " accepted out of " + (totalKills + totalKillsOffset).toString();
 
 
         // return the number of kills in the last 30 days
         console.log(`The number of kills in the last 30 days is ${numberOfKills}.`);
         console.log(`The total number of kills is ${totalKills}.`);
-        console.log(''); // add a blank line to the console output
         return numberOfKills;
     });
 }
