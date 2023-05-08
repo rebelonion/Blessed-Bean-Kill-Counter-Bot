@@ -135,3 +135,6 @@ blues.json
 #recent requests files
 recentKillRequests.json
 recentWhyRequests.json
+
+#.idea folder
+.idea/
