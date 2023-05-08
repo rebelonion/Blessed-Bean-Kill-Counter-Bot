@@ -64,12 +64,12 @@ module.exports = {
         if (recentRequests[interaction.user.id] != null) {
             const lastRequest = recentRequests[interaction.user.id];
             const timeSinceLastRequest = (Date.now() - lastRequest) / 1000;
-            if (timeSinceLastRequest < 300) {
+            if (timeSinceLastRequest < 60) {
                 log += `Time since last request: ${timeSinceLastRequest} seconds.\n`;
-                const minutes = Math.floor((300 - timeSinceLastRequest) / 60);
-                const seconds = Math.floor((300 - timeSinceLastRequest) % 60);
-                log += `User ${interaction.user.tag} has made a request in the last 5 minutes. Please wait ${minutes} minutes and ${seconds} seconds before making another request.\n`;
-                return interaction.editReply(`You have made a request in the last 5 minutes. Please wait ${minutes} minutes and ${seconds} seconds before making another request.`);
+                const minutes = Math.floor((60 - timeSinceLastRequest) / 60);
+                const seconds = Math.floor((60 - timeSinceLastRequest) % 60);
+                log += `User ${interaction.user.tag} has made a request in the last 1 minutes. Please wait ${minutes} minutes and ${seconds} seconds before making another request.\n`;
+                return interaction.editReply(`You have made a request in the last 1 minute. Please wait ${minutes} minutes and ${seconds} seconds before making another request.`);
             }
         } else {
             //add the user to the recentRequests.json file
@@ -265,7 +265,7 @@ module.exports = {
 
                     //update the recentRequests.json file
                     recentRequests[interaction.user.id] = Date.now();
-                    ////----fs.writeFileSync('recentKillRequests.json', JSON.stringify(recentRequests));
+                    fs.writeFileSync('recentKillRequests.json', JSON.stringify(recentRequests));
 
                     //update the log file
                     console.log(log);
